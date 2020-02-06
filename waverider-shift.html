@@ -1,0 +1,41 @@
+<p id=o style=font-family:monospace;position:fixed;left:20;top:20;color:#FFF onclick=I()></p>
+<canvas id=c width=800 height=600/>
+<script>
+T=10;Q=34962;o=0;P=[.6,0,0,0,0,.4,0,0,0,0,-1,-1,0,0,-2,0];V="1000010000100001".split("");M=[...V];V[13]=-10;
+H=[0,0,0,0,9,0,6,9,0,6,0,0];
+X="660965766660766696660696566660566365".split("").map(e=>(e-6)/3);Z=[];I=_=>{x=u=y=v=s=w=z=g=yy=0};
+N=_=>Math.random()*T-5;L=(i,j)=>(j*60)+(i*6);
+for(i=0;i<800;i++)for(j=0;j<T;j++){k=L(j,i);Z[k]=j*T-50;Z[k+1]=N();Z[k+2]=-i*T;Z[k+3]=j?Z[k-6]:Z[k];Z[k+4]=j?Z[k-5]:Z[k+1];Z[k+5]=j?Z[k-4]:Z[k+2]}
+E=e=>document.getElementById(e);
+A=e=>{
+    x=-(400-e.offsetX)/40;
+}
+KK=e=>{
+    if(e.keyCode==37 && x>-9)
+    {
+        x-=4;
+    }
+    if(e.keyCode==39 && x<9)
+    {
+        x+=4;
+    }
+    if(e.keyCode==16)
+    {
+        yy=-10-yy
+        //console.log(V[13]);
+        V[13]=-yy-10;
+        
+        //rz(P,180);
+        //rz(M,180);
+    }
+}
+    
+B=b=>G.bindBuffer(Q,b);J=a=>G.bufferData(Q,new Float32Array(a),Q+82);U=(v,x,y,z,w)=>G.uniform4f(v,x,y,z,w);F=v=>G.getUniformLocation(p,v);D=(u,x,y,z,n,p)=>{G.enableVertexAttribArray(a);B(u);G.vertexAttribPointer(a,3,5126,0,0,0);U(t,x,y,z,0);G.drawArrays(p,0,n)};Y=a=>(r=G.createBuffer(),B(r),J(a),r);S=(t,s)=>(l=G.createShader(t),G.shaderSource(l,s),G.compileShader(l),G.attachShader(p,l));W=(l,b)=>G.uniformMatrix4fv(l,0,b);
+R=e=>{z-=-~s*(e-o)*5e-3;o=e;if(!g){x0=(x+50)/T,z0=-z/T,i=~~x0,j=i+1,k=~~z0,l=k+1,xa=j-x0,xb=x0-i,y=yy+((l-z0)*(xa*Z[L(i,k)+1]+xb*Z[L(j,k)+1]))+((z0-k)*(xa*Z[L(i,l)+1]+xb*Z[L(j,l)+1]));
+if(w>-(V[14]=-z-6))w-=100,u=N(),s++;G.viewport(0,0,800,600);G.clearColor(0,0,0,1);G.clear(16384);W(F("p"),P);W(F("q"),V);W(F("m"),M);G.useProgram(p);
+U(c,.7,0,.3,1);D(m,0,0,0,16e3,1);g=s>=60||z<w&&z>w-2&&!(x<u+4.0&&x>u-4.0);U(c,.5,1,1,1);D(f,u-3,v,w,4,2);U(c,1,1,1,1);D(b,x,y,z,12,2);O.innerText=`Wave Rider! [New Game] [Score ${s}] ${g?"[Game Over]":""}`}requestAnimationFrame(R)};
+C=E("c");O=E("o");G=C.getContext("webgl");p=G.createProgram();
+C.addEventListener("mousemove",A);
+document.addEventListener("keyup",KK);
+i=`uniform`;q=` vec4 `;h=`;void main(){gl_`;S(35633,`attribute${q}v;${i}${q}t;${i}${q}c;${i} mat4 p;${i} mat4 q;${i} mat4 m;varying${q}s${h}Position=p*q*m*(v+t);s=c;}`);S(35632,`precision lowp float;varying${q}s${h}FragColor=s;}`);G.linkProgram(p);a=G.getAttribLocation(p,"v");t=F("t");c=F("c");b=Y(X);f=Y(H);m=Y(Z);I();R(0)
+</script>
